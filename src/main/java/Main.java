@@ -6,9 +6,13 @@ public class Main {
 
         System.out.println("Player 1, please enter a word to guess for player 2: ");
         String wordToGuess = scanner.nextLine();
-        if (wordToGuess.isEmpty() || wordToGuess.isBlank())
-            System.out.println("Empty String");
+        if (wordToGuess.isEmpty() || wordToGuess.isBlank()) {
+            System.out.println("Input was empty, terminating program!");
+            System.exit(0);
+        }
         else
             System.out.println(wordToGuess);
+
+        Hangman game = new Hangman(wordToGuess);
     }
 }
