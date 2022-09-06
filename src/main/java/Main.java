@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter a word to guess: ");
+        System.out.println("Player 1, please enter a word to guess for player 2: ");
         String wordToGuess = scanner.nextLine();
         if (wordToGuess.isEmpty() || wordToGuess.isBlank())
             System.out.println("Empty String");
