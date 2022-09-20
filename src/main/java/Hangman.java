@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class Hangman {
     private String wordToGuess;
-    int mistakesAllowed;
-    List<String> correctGuesses = new ArrayList<String>();
-    List<String> incorrectGuesses = new ArrayList<String>();
+    private int mistakesAllowed;
+    private List<String> correctGuesses = new ArrayList<String>();
+    private List<String> incorrectGuesses = new ArrayList<String>();
 
     public static final int DEFAULT_MISTAKES_ALLOWED = 5;
 
