@@ -24,10 +24,16 @@ public class Main {
 
         String guessWord;
         boolean guessedCorrectly = false;
-        while (game.getNumberOfIncorrectGuesses() < Hangman.DEFAULT_MISTAKES_ALLOWED && !guessedCorrectly) {
+        while (game.getNumberOfIncorrectGuesses() < game.getMistakesAllowed() && !game.isGameWon()) {
             System.out.println("Player 2, please guess a letter or a word: ");
             guessWord = scanner.nextLine();
-            guessedCorrectly = game.guess(guessWord);
+            if (game.guessNotInAGuessList(guessWord))
+                game.guess(guessWord);
+            else
+                System.out.println("This has already been guessed and will not be counted as an attempt, please try again!");
+
+            System.out.println("Word progress: " + game.getCurrentGuessWordState());
         }
+        System.out.println("Game won? " + game.isGameWon());
     }
 }
