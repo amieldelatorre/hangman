@@ -1,7 +1,7 @@
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Arrays;
 
 public class Hangman {
     private String wordToGuess;
@@ -22,6 +22,10 @@ public class Hangman {
 
     public String getWordToGuess() {
         return wordToGuess;
+    }
+
+    public int getMistakesAllowed() {
+        return mistakesAllowed;
     }
 
     public int getNumberOfCorrectGuesses() {
@@ -59,5 +63,44 @@ public class Hangman {
         int indexOfLetter = wordToGuess.indexOf(guessChar);
         // indexOf returns -1 if string or character is not found
         return indexOfLetter != -1;
+    }
+
+    public String getCurrentGuessWordState() {
+        char[] stringToReturn = new char[wordToGuess.length()];
+        Arrays.fill(stringToReturn, '_');
+        for (String correctGuess : correctGuesses) {
+            if (correctGuess.length() > 1 && wordToGuess.equals(correctGuess)) {
+                return correctGuess;
+            }
+            else if (correctGuess.length() <= 1) {
+                for (int i = 0; i < wordToGuess.length(); i++) {
+                    char charInWordToGuess = wordToGuess.charAt(i);
+                    if (String.valueOf(charInWordToGuess).equals(correctGuess))
+                        stringToReturn[i] = charInWordToGuess;
+                }
+            }
+        }
+        return String.valueOf(stringToReturn);
+    }
+
+    public boolean isGameWon() {
+        boolean result = false;
+        List<String> charsGuessed = new ArrayList<String>();
+        for (String correctGuess : correctGuesses) {
+            if (correctGuess.length() > 1 && wordToGuess.equals(correctGuess)) {
+                result = true;
+                break;
+            }
+            else if (correctGuess.length() == 1)
+                charsGuessed.add(correctGuess);
+        }
+
+        if (!result)
+            return charsGuessed.size() == wordToGuess.length();
+        return result;
+    }
+
+    public boolean guessNotInAGuessList(String guess) {
+        return !correctGuesses.contains(guess) && !incorrectGuesses.contains(guess);
     }
 }
